@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="baxter" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:arg name="gazebo" default="true"/>
+  <xacro:arg name="gazebo" default="false"/>
   <xacro:arg name="pedestal" default="true"/>
   <!-- TODO: have an arg for pa_demo that sets correct eef's/table/xtion -->
   <xacro:arg name="table" default="true"/>
