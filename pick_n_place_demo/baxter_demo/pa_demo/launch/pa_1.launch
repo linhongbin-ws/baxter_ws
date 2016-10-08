@@ -1,0 +1,18 @@
+<launch>
+
+  <arg name="debug" default="false" />
+  <arg name="record" default="false"/>
+
+  <!-- Debug python code in pdb in external bash emulator, xterm -->
+  <arg     if="$(arg debug)" name="pdb_arg" value="xterm -e python -m pdb" />
+  <arg unless="$(arg debug)" name="pdb_arg" value="" />
+
+  <!-- Openni2 -->
+  <include file="$(find openni2_launch)/launch/openni2.launch" />
+
+  <!-- pa_localization: visual_localization2.py -->
+  <node name="visual_localization2" pkg="pa_localization" type="visual_localiztion2.py" output="screen" respawn="true"/>
+
+  <!-- RVIZ -->
+  <node pkg="rviz" type="rviz" name="rviz"/>      
+</launch>
