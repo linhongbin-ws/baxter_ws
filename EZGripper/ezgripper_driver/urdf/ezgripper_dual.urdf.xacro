@@ -41,7 +41,7 @@
     <ezgripper_finger prefix="${prefix}" postfix="2" reflect="1" />
 
     <ezgripper_knuckle prefix="${prefix}" postfix="1" reflectY="1" reflectZ="1" reflectR="1" mimic_test="false"/>
-    <ezgripper_knuckle prefix="${prefix}" postfix="2" reflectY="-1" reflectZ="1" reflectR="-1" mimic_test="true"/>
+    <ezgripper_knuckle prefix="${prefix}" postfix="2" reflectY="-1" reflectZ="1" reflectR="-1" mimic_test="false"/>
 
     <ezgripper_knuckle_trans prefix="${prefix}" postfix="1"/>
     <ezgripper_knuckle_trans prefix="${prefix}" postfix="2"/>
@@ -91,6 +91,7 @@
 </macro>
     <!-- transmissions for Gazebo -->
 
+ <!--
 <macro name="ezgripper_knuckle_trans" params="prefix postfix">
    <transmission name="${prefix}_ezgripper_trans_${postfix}">
       <type>transmission_interface/SimpleTransmission</type>
@@ -116,7 +117,8 @@
 <gazebo>
    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
    </plugin>
-</gazebo>
+   </gazebo>
+   -->
 </robot>
 
 

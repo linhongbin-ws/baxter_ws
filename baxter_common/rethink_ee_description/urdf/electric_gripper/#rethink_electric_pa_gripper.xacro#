@@ -71,7 +71,7 @@
     <joint name="${gripper_side}_gripper_r_finger_joint" type="prismatic">
       <origin rpy="0 0 0" xyz="0 -0.03 0.085"/>
       <axis xyz="0 1 0"/>
-      <parent link="${side}_gripper_base"/>
+      <parent link="${side}_gripper3_base"/>
       <child link="${gripper_side}_gripper_r_finger"/>
       <limit effort="20.0" lower="-0.020833" upper="0.0" velocity="5.0"/>
       <mimic joint="${gripper_side}_gripper_l_finger_joint" multiplier="-1.0"/>
