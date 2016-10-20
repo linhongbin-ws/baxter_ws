@@ -1,25 +1,46 @@
-
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <launch>
-
-  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find baxter_description)/urdf/baxter_sake.urdf.xacro' gazebo:=true" /> 
+
+  <rosparam file="$(find robots_description)/config/controllers_dual.yaml" command="load"/> 
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller"/>
+
+  <!-- Start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
+  </include>
+
+ 
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model sake_robot" />
+
+
+
+
+  
+ <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
   <!-- These arguments load the electric grippers, for example left_electric_gripper:=true -->
-  <arg name="left_electric_gripper" default="true"/>
+  <arg name="left_electric_gripper" default="fault"/>
   <arg name="right_electric_gripper" default="true"/>
+
   <!-- Load the URDF into the ROS Parameter Server -->
-  <!-- This xacro will pull in baxter_base.urdf.xacro, left_end_effector.urdf.xa
+  <!-- This xacro will pull in baxter_base.urdf.xacro, left_end_effector.urdf.xacro,
                                            and right_end_effector.urdf.xacro
        Note: if you set this to false, you MUST have set the robot_description prior
              to launching baxter_world -->
   <arg name="load_robot_description" default="true"/>
   <param if="$(arg load_robot_description)" name="robot_description"
-      command="$(find xacro)/xacro.py --inorder $(find baxter_description)/urdf/baxter.urdf.xacro gazebo:=true"/>
+      command="$(find xacro)/xacro.py --inorder '$(find baxter_description)/urdf/baxter_sake.urdf.xacro' gazebo:=true"/>
 
   <!-- We resume the logic in empty_world.launch, changing the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -59,6 +80,7 @@
   <include file="$(find baxter_sim_hardware)/launch/baxter_sdk_control.launch">
       <arg name="right_electric_gripper" value="$(arg right_electric_gripper)"/>
       <arg name="left_electric_gripper" value="$(arg left_electric_gripper)"/>
-  </include>
+  </include>	
+  
 
 </launch>

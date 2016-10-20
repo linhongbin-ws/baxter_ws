@@ -1,0 +1,149 @@
+<robot
+  name="Force_hand_full.SLDASM">
+  <link
+    name="FT_bottom_plate">
+    <inertial>
+      <origin
+        xyz="-0.0051288 -0.18619 -0.070659"
+        rpy="0 0 0" />
+      <mass
+        value="0.051726" />
+      <inertia
+        ixx="2.5588E-05"
+        ixy="1.8333E-21"
+        ixz="2.4673E-08"
+        iyy="2.3459E-05"
+        iyz="2.4286E-22"
+        izz="4.7997E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT_bottom_plate.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT_bottom_plate.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FT">
+    <inertial>
+      <origin
+        xyz="0.0030381 0.0065967 0.01714"
+        rpy="0 0 0" />
+      <mass
+        value="1.4264" />
+      <inertia
+        ixx="0.0010241"
+        ixy="0.00016944"
+        ixz="2.4095E-05"
+        iyy="0.00071846"
+        iyz="5.2318E-05"
+        izz="0.0014993" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.77647 0.75686 0.73725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FT_Bottom_Joint"
+    type="fixed">
+    <origin
+      xyz="0.00083854 -0.18619 -0.03268"
+      rpy="3.1416 6.123E-17 1.5708" />
+    <parent
+      link="FT_bottom_plate" />
+    <child
+      link="FT" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="FT_Top_Plate">
+    <inertial>
+      <origin
+        xyz="-3.2055E-10 0.0092556 0.0055057"
+        rpy="0 0 0" />
+      <mass
+        value="0.053196" />
+      <inertia
+        ixx="2.5333E-05"
+        ixy="5.8629E-13"
+        ixz="-4.7319E-16"
+        iyy="2.7087E-05"
+        iyz="2.2091E-08"
+        izz="5.1339E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT_Top_Plate.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Force_hand_full.SLDASM/meshes/FT_Top_Plate.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FT_Top_Joint"
+    type="fixed">
+    <origin
+      xyz="0 -0.016 -0.011"
+      rpy="-3.4694E-16 0 0" />
+    <parent
+      link="FT" />
+    <child
+      link="FT_Top_Plate" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

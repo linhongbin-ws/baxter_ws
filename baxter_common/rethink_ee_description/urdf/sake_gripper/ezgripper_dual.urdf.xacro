@@ -3,7 +3,9 @@
 
 <!--macro name="ezgripper" params="*origin"-->
 
+<xacro:arg name="gazebo" default="false"/>
 
+<xacro:include filename="$(find baxter_description)/urdf/materials.xacro"/>
 
 <macro name="ezgripper_dual" params="prefix parent_link *origin">
  
@@ -16,6 +18,7 @@
         <geometry>
           <mesh filename="package://ezgripper_driver/meshes/visual/SAKE_Palm_Dual.stl"/>
         </geometry>
+        <material name="black"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -30,13 +33,21 @@
     </link>
 
     <joint name="${prefix}_ezgripper_connect" type="fixed">
-        <origin rpy="0 0 0" xyz="0.049 0.0 0.1"/>
+        <origin rpy="0 ${-pi/2} 0" xyz="0 0 0"/>
         <parent link="${parent_link}"/>
         <child link="${prefix}_ezgripper_palm_link"/>
         <axis xyz="0 0 0"/>
         <limit effort="0" lower="-1.57075" upper="0.25" velocity="3.67"/>
     </joint>
 
+    <gazebo reference="${prefix}_ezgripper_palm_link">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/White</material>
+    </gazebo>
+
+    
+    
     <ezgripper_finger prefix="${prefix}" postfix="1" reflect="1" />
     <ezgripper_finger prefix="${prefix}" postfix="2" reflect="1" />
 
@@ -46,7 +57,7 @@
     <ezgripper_knuckle_trans prefix="${prefix}" postfix="1"/>
     <ezgripper_knuckle_trans prefix="${prefix}" postfix="2"/>
 
-    <gazebo_knuckle_jsp prefix="${prefix}" />
+   <gazebo_knuckle_jsp prefix="${prefix}" />
 
 </macro>
 
@@ -58,6 +69,7 @@
         <geometry>
           <mesh filename="package://ezgripper_driver/meshes/visual/SAKE_Finger.stl"/>
         </geometry>
+         <material name="grey"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -70,6 +82,12 @@
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
       </inertial>
     </link>
+
+    <gazebo reference="{prefix}_ezgripper_finger_${postfix}">
+      <mu1>0.8</mu1>
+      <mu2>0.8</mu2>
+      <material>Gazebo/Grey</material>
+    </gazebo> 
 </macro>
  
 
@@ -91,7 +109,7 @@
 </macro>
     <!-- transmissions for Gazebo -->
 
- 
+
 <macro name="ezgripper_knuckle_trans" params="prefix postfix">
    <transmission name="${prefix}_ezgripper_trans_${postfix}">
       <type>transmission_interface/SimpleTransmission</type>
@@ -113,12 +131,12 @@
    </gazebo>
 </macro>
 
-
 <gazebo>
    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
    </plugin>
    </gazebo>
-  
+
+
 </robot>
 
 

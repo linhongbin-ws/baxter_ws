@@ -1,0 +1,6 @@
+<package>
+  <description brief="FT_Electric2">FT_Electric2</description>
+  <depend package="gazebo" />
+  <author>me</author>
+  <license>BSD</license>
+</package>

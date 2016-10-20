@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<robot name="baxter" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+  <xacro:arg name="pedestal" default="true"/>
+  <!-- Baxter Base URDF -->
+  <xacro:include filename="$(find baxter_description)/urdf/baxter_base/baxter_base_ft2.urdf.xacro">
+    <xacro:arg name="gazebo" value="${gazebo}"/>
+  </xacro:include>
+  
+  <!--import the FT on baxter hand-->
+  <xacro:include filename="$(find baxter_description)/urdf/FT_Electric3/robots/FT_Electric3.URDF"/>
+
+  <joint name="right_ft_hand" type="fixed">
+    <origin rpy="${pi} ${pi} 0" xyz="0.025 0 0.11355"/>
+    <parent link="right_wrist"/>
+    <child link="FT_bottom_plate"/>
+  </joint>
+  
+
+  <!-- Baxter Pedestal -->
+  <xacro:if value="$(arg pedestal)">
+    <xacro:include filename="$(find baxter_description)/urdf/pedestal/pedestal.xacro">
+      <xacro:arg name="gazebo" value="${gazebo}"/>
+    </xacro:include>
+  </xacro:if>
+
+  <!-- Left End Effector -->
+  <xacro:include filename="$(find baxter_description)/urdf/left_end_effector.urdf.xacro" />
+
+  <!-- Right End Effector -->
+  <xacro:include filename="$(find baxter_description)/urdf/right_end_effector.urdf.xacro" />
+
+
+
+
+
+
+<!-- Ft sensor plugin. warning:the reference joint which is defined as fixed  can not be selected. So in this case left_w2 is a revolute type in urdf!  -->  
+  <gazebo reference="FT_Top_Joint">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <updateRate>10.0</updateRate>
+      <topicName>ft_sensor_topic</topicName>
+      <jointName>FT_Top_Joint</jointName>
+    </plugin>
+  </gazebo>
+
+
+</robot>

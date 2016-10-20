@@ -4,13 +4,13 @@
 
 <property name="ezgripper_offset_x" value="0.049"/>
 <property name="ezgripper_offset_y" value="0.0"/>
-<property name="ezgripper_offset_z" value="0.01"/>
+<property name="ezgripper_offset_z" value="0.21"/>
 
 
 <xacro:include filename="$(find ezgripper_driver)/urdf/ezgripper_dual.urdf.xacro"/>
 <!-- Add the gripper -->
 <ezgripper_dual prefix="left" parent_link="base_link">
-<origin xyz="${ezgripper_offset_x} ${ezgripper_offset_y} ${ezgripper_offset_z}" rpy="3.1415/2 0 0"/>
+<origin xyz="${ezgripper_offset_x} ${ezgripper_offset_y} ${ezgripper_offset_z}" rpy="0 0 0"/>
 </ezgripper_dual>
 
 <link name="world"/>
